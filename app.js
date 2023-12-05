@@ -27,19 +27,20 @@ app.get("/about" , function(req , res){
   res.render("about" , {content : aboutContent})
 })
 
-app.get("/posts/:topic" , function(req , res){
-  var tt = req.params.topic ;
-  tar = lodash.lowerCase(tt)
+app.get("/posts/:topic", function (req, res) {
+  var tt = req.params.topic;
+  tar = lodash.lowerCase(tt);
 
-  for(var i = 0 ; i < posts.length ; i++){
-    if(lodash.lowerCase(posts[i].title) === tar){
-      res.render("post" , {postTitle : posts[i].title , postContent : posts[i].body});
-    }
-    else{
-      res.send("Error 404");
+  for (let i = 0; i < posts.length; i++) {
+    if (lodash.lowerCase(posts[i].title) === tar) {
+      return res.render("post", {
+        postTitle: posts[i].title,
+        postContent: posts[i].body,
+      });
     }
   }
-})
+  res.send("Error 404");
+});
 
 app.get("/compose" , function(req , res){
 
