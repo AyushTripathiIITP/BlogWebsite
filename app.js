@@ -54,10 +54,14 @@ app.post("/compose", function (req, res) {
     title: req.body.composeContentTitle,
     body: req.body.composeContentBody,
   };
-
+  
   posts.push(post);
 
   res.redirect("/");
+});
+
+app.get("*", (req, res) => {
+  res.status(404).render('404-page');
 });
 
 app.listen(3000, function () {
